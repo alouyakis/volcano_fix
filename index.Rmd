@@ -47,7 +47,7 @@ print(volc_plot)
 print(volc_plot_fixed)
 ```
 
-```{r}
+```{r testing interactive}
 library(ggplot2)
 library(plotly)
 p <- ggplot(tmm_r) +
