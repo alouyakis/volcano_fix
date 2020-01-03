@@ -1,0 +1,24 @@
+---
+title: "volcano fix"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(manhattanly)
+tmm_r <- read.delim(file = "mate_00vs02_tmm_filt_annot.txt", header=TRUE, row.names = NULL, com='', check.names=F)
+head(tmm_r)
+volc_obj <- volcanor(tmm_r, p = "P", effect_size = "EFFECTSIZE", snp = "locus_tag", 
+                     gene = "protein", annotation1 = "old_locus_tag", annotation2 = "arCOG_name")
+volc_plot <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_color = "orange", 
+          genomewideline = -log10(1e-2), genomewideline_color = "green", title = "t00 vs t02")
+volc_plot_fixed <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_color = "orange", 
+          genomewideline = -log10(1e-2), genomewideline_color = "green", title = "t00 vs t02", 
+          highlight = tmm_r$locus_tag, highlight_color = "black")
+print(volc_plot)
+print(volc_plot_fixed)
+```
