@@ -6,20 +6,8 @@ knit: (function(input_file, encoding) {
   encoding=encoding,
   output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 output: 
-  html_document:
-    theme: sandstone
-    highlight: tango
+  html_document
 ---
-
-<style>
-#TOC {
-  top: 1%;
-  opacity: 0.5;
-}
-#TOC:hover {
-  opacity: 1;
-}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -40,10 +28,15 @@ volc_plot_fixed <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_l
 ```
 
 ```{r, fig.cap="Volcano plot doesn't have annotations for non-significant points", message=FALSE, warning=FALSE, fig.align="center"}
+volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_color = "orange", 
+          genomewideline = -log10(1e-2), genomewideline_color = "green", title = "t00 vs t02")
 print(volc_plot)
 ```
 
 ```{r, fig.cap="Annotations present for all, but significant are no longer separately highlighted", message=FALSE, warning=FALSE, fig.align="center"}
+volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_color = "orange", 
+          genomewideline = -log10(1e-2), genomewideline_color = "green", title = "t00 vs t02", 
+          highlight = tmm_r$locus_tag, highlight_color = "black")
 print(volc_plot_fixed)
 ```
 
