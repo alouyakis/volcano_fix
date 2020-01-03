@@ -46,3 +46,23 @@ print(volc_plot)
 ```{r, fig.cap="Annotations present for all, but significant are no longer separately highlighted", message=FALSE, warning=FALSE, fig.align="center"}
 print(volc_plot_fixed)
 ```
+
+```{r}
+library(ggplot2)
+library(plotly)
+p <- ggplot(tmm_r) +
+  geom_point(data = tmm_r, aes(x = log2FC, y = -log10(P), text = paste(locus_tag,"\n",protein,"\n",arCOG_name,"\n",old_locus_tag)),
+             color = "black", cex = 2) +
+#  geom_point(data = tmm_r, aes(x = log2FC, y = P), color = "lightgreen", cex = 3) +
+  # geom_point(data = dfm1, aes(x = logFC.x, y = logFDR.x), color = "blue", cex = 3) +
+  # geom_text(data = dfm1, aes(x = logFC.x, y = logFDR.x, label = gene), hjust = 1, vjust = 2) +
+  theme_bw() +
+  xlab("log(2) fold change") +
+  ylab("log(10) FDR") +
+  geom_vline(xintercept = 2, col = "red", linetype = "dashed", size = 0.5) +
+  geom_vline(xintercept = -2, col = "red", linetype = "dashed", size = 0.5) +
+  geom_hline(yintercept = 0.05, col = "red", linetype = "dashed", size = 0.5)
+p
+ggplotly(p, tooltip = "text")
+```
+
