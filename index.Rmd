@@ -11,13 +11,23 @@ output:
     highlight: tango
 ---
 
+<style>
+#TOC {
+  top: 1%;
+  opacity: 0.5;
+}
+#TOC:hover {
+  opacity: 1;
+}
+</style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(manhattanly)
 ```
 
 
 ```{r}
-library(manhattanly)
 tmm_r <- read.delim(file = "mate_00vs02_tmm_filt_annot.txt", header=TRUE, row.names = NULL, com='', check.names=F)
 head(tmm_r)
 volc_obj <- volcanor(tmm_r, p = "P", effect_size = "EFFECTSIZE", snp = "locus_tag", 
@@ -29,10 +39,10 @@ volc_plot_fixed <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_l
           highlight = tmm_r$locus_tag, highlight_color = "black")
 ```
 
-```{r, fig.cap="Volcano plot doesn't have annotations for non-significant points"}
+```{r, fig.cap="Volcano plot doesn't have annotations for non-significant points", message=FALSE, warning=FALSE, fig.align="center"}
 print(volc_plot)
 ```
 
-```{r, fig.cap="Annotations present for all, but significant are no longer separately highlighted"}
+```{r, fig.cap="Annotations present for all, but significant are no longer separately highlighted", message=FALSE, warning=FALSE, fig.align="center"}
 print(volc_plot_fixed)
 ```
