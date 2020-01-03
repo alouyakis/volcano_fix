@@ -24,6 +24,12 @@ volc_plot <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_co
 volc_plot_fixed <- volcanoly(volc_obj, effect_size_line = c(-3,3), effect_size_line_color = "orange", 
           genomewideline = -log10(1e-2), genomewideline_color = "green", title = "t00 vs t02", 
           highlight = tmm_r$locus_tag, highlight_color = "black")
+```
+
+```{r, fig.cap="Volcano plot doesn't have annotations for non-significant points"}
 print(volc_plot)
+```
+
+```{r, fig.cap="Annotations present for all, but significant are no longer separately highlighted"}
 print(volc_plot_fixed)
 ```
